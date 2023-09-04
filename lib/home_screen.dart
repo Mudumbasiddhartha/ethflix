@@ -1,6 +1,6 @@
 import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/material.dart";
-
+import 'components/card_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<String> categories = ['Shows', 'Movies', 'Live Sports'];
@@ -57,39 +57,20 @@ class CategorySection extends StatelessWidget {
             enlargeCenterPage: true,
           ),
           items: [
-            CardWidget(imageUrl: 'https://img2.wallspic.com/previews/0/9/9/7/3/137990/137990-uefa_champions_league-sky-lionel_messi-sport_venue-fun-x750.jpg'),
-            CardWidget(imageUrl: 'https://img2.wallspic.com/previews/0/9/9/7/3/137990/137990-uefa_champions_league-sky-lionel_messi-sport_venue-fun-x750.jpg'),
-            CardWidget(imageUrl: 'https://img2.wallspic.com/previews/0/9/9/7/3/137990/137990-uefa_champions_league-sky-lionel_messi-sport_venue-fun-x750.jpg'),
+            CardWidget(
+                imageUrl:
+                    'https://img2.wallspic.com/previews/0/9/9/7/3/137990/137990-uefa_champions_league-sky-lionel_messi-sport_venue-fun-x750.jpg'),
+            CardWidget(
+                imageUrl:
+                    'https://img2.wallspic.com/previews/0/9/9/7/3/137990/137990-uefa_champions_league-sky-lionel_messi-sport_venue-fun-x750.jpg'),
+            CardWidget(
+                imageUrl:
+                    'https://img2.wallspic.com/previews/0/9/9/7/3/137990/137990-uefa_champions_league-sky-lionel_messi-sport_venue-fun-x750.jpg'),
             // Add more CardWidgets for each item in the carousel
           ],
         ),
         SizedBox(height: 20),
       ],
-    );
-  }
-}
-
-class CardWidget extends StatelessWidget {
-  final String imageUrl;
-
-  CardWidget({required this.imageUrl});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.network(
-            imageUrl,
-            fit: BoxFit.cover,
-            width: 300,
-          ),
-        ),
-      ),
     );
   }
 }
