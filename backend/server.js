@@ -2,7 +2,7 @@ const Koa = require('koa');
 const Router = require('@koa/router');
 const cors = require('@koa/cors');
 const ethers = require('ethers');
-const PaymentProcessor = require('../frontend/src/contracts/PaymentProcessor.json');
+const PaymentProcessor = require('../build/contracts/PaymentProcessor.json');
 const { Payment } = require('./db.js');
 
 const app = new Koa();
@@ -18,6 +18,7 @@ const items = {
 router.get('/', (ctx, next) => {
   // ctx.router available
   // serve the frontend bundle in ../frontend/build
+  ctx.body = 'Hello World!';
 });
 
 //generate a paymentId for purchage

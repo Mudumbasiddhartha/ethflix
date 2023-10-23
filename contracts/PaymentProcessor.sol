@@ -11,7 +11,7 @@ contract PaymentProcessor{
         uint date
     );
     
-    constructor(address adminAddress, address daiAddress) public {
+    constructor(address adminAddress, address daiAddress) {
         admin = adminAddress;
         dai = IERC20(daiAddress);
     }
