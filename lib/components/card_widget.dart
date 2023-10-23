@@ -15,13 +15,14 @@ class CardWidget extends StatelessWidget {
         },
         child: Card(
           elevation: 4,
+          shadowColor: Colors.grey,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
               imageUrl,
               fit: BoxFit.cover,
-              width: 300,
+              width: 400,
             ),
           ),
         ),
