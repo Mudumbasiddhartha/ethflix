@@ -1,21 +1,57 @@
 import "package:carousel_slider/carousel_slider.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import 'components/card_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<String> categories = ['Shows', 'Movies', 'Live Sports'];
-
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('EthFlix'),
-        // backgroundColor: Colors.black,
+        title: Text("Hey! ${FirebaseAuth.instance.currentUser!.displayName}"),
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            // Handle menu press
+            Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  DrawerHeader(
+                    child: Text('Drawer Header'),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text('Item 1'),
+                    onTap: () {
+                      // Update the state of the app.
+                      // ...
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Item 2'),
+                    onTap: () {
+                      // Update the state of the app.
+                      // ...
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.logout_outlined),
             onPressed: () {
               // Handle search action
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacementNamed(context, '/login');
             },
           ),
         ],
@@ -40,6 +76,7 @@ class CategorySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        //add welcome user name
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(

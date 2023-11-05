@@ -16,8 +16,6 @@ const items = {
 
 //homepage
 router.get('/', (ctx, next) => {
-  // ctx.router available
-  // serve the frontend bundle in ../frontend/build
   ctx.body = 'Hello World!';
 });
 
@@ -66,7 +64,7 @@ app.listen(4000, () => {
 });
 
 const listenToEvents = () => {
-    const provider = new ethers.providers.JsonRpcProvider('http://localhost:9545');
+    const provider = new ethers.providers.JsonRpcProvider('http://localhost:7545');
     const networkId = '5777';
     //when connecting to mainnet or public testnets, use this instead
     //const provider = ethers.providers.getDefaultProvider('mainnet | kovan | etc..');
@@ -87,8 +85,8 @@ const listenToEvents = () => {
         `);
         const payment = await Payment.findOne({id: paymentId.toString()});
         if(payment) {
-        payment.paid = true;
-        await payment.save();
+            payment.paid = true;
+            await payment.save();
         }
     });
 };
