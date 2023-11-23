@@ -1,3 +1,4 @@
+import 'package:ethflix/payment_screen.dart';
 import 'package:ethflix/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'details_screen.dart';
@@ -24,9 +25,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Color.fromARGB(255, 26, 26, 26),
+        iconTheme: IconThemeData(color: Colors.blue),
       ),
       initialRoute: '/login',
-      home: SignInScreen(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
       routes: {
         '/login': (context) => SignInScreen(),

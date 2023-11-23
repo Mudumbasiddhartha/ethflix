@@ -9,50 +9,61 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hey! ${FirebaseAuth.instance.currentUser!.displayName}"),
-        backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            // Handle menu press
-            Drawer(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  DrawerHeader(
-                    child: Text('Drawer Header'),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                    ),
-                  ),
-                  ListTile(
-                    title: Text('Item 1'),
-                    onTap: () {
-                      // Update the state of the app.
-                      // ...
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Item 2'),
-                    onTap: () {
-                      // Update the state of the app.
-                      // ...
-                    },
-                  ),
-                ],
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.black,
               ),
-            );
-          },
+              child: Text(
+                'Welcome ${FirebaseAuth.instance.currentUser!.displayName}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profile'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout_outlined),
+              title: Text('Logout'),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacementNamed(context, '/login');
+              },
+            ),
+          ],
         ),
+      ),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        elevation: 0,
+        title: Text("Hey! ${FirebaseAuth.instance.currentUser!.displayName}"),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout_outlined),
-            onPressed: () {
-              // Handle search action
-              FirebaseAuth.instance.signOut();
-              Navigator.pushReplacementNamed(context, '/login');
-            },
+            icon: Icon(
+              Icons.favorite_outline_rounded,
+              size: 28,
+              color: const Color.fromARGB(255, 255, 84, 141),
+            ),
+            onPressed: () {},
           ),
         ],
       ),
@@ -76,7 +87,6 @@ class CategorySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        //add welcome user name
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(

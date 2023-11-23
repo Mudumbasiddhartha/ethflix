@@ -4,8 +4,10 @@ const cors = require('@koa/cors');
 const ethers = require('ethers');
 const PaymentProcessor = require('../build/contracts/PaymentProcessor.json');
 const { Payment } = require('./db.js');
+const {koaBody } = require('koa-body');
 
 const app = new Koa();
+app.use(koaBody());
 const router = new Router();
 
 const items = {
@@ -53,14 +55,62 @@ router.get('/api/getItemUrl/:paymentId', async (ctx, next) => {
         };
     }
 });
+duration= 0;
+router.post('/api/storeDuration/:duration', async (ctx, next) => {
+    const formdata = ctx.request.body;
+    console.log(formdata);
+    duration = ctx.params.duration;
+    console.log(duration);
+    ctx.body = {
+        status: 'success',
+        message: 'duration stored'
+    };
+});
+router.get('/api/getDuration', async (ctx, next) => {
+    ctx.body = {
+        duration : duration
+    }
+}
+);
+
+
+router.post('/api/pay', async (ctx, next) => {
+    const {paymentId, paymentToken} = ctx.request.body;
+    const url = `http://localhost:4000/api/getItemUrl/${paymentId}`;
+    const provider = new ethers.providers.JsonRpcProvider('http://localhost:7545');
+    const signer = provider.getSigner();
+    const paymentProcessor = new ethers.Contract(
+        PaymentProcessor.networks['5777'].address,
+        PaymentProcessor.abi,
+        signer
+    );
+    const payment = await Payment.findOne({id: paymentId});
+    if(payment && payment.paid === false) {
+        const tx = await paymentProcessor.pay(paymentId, paymentToken, url);
+        await tx.wait();
+        ctx.body = {
+            status: 'success',
+            message: 'payment done'
+        };
+    } else {
+        ctx.body = {
+            status: 'error',
+            message: 'payment already made or paymentId does not exist'
+        };
+    }
+});
 
 app
     .use(cors())
     .use(router.routes())
     .use(router.allowedMethods());
 
+
+
 app.listen(4000, () => {
     console.log('Server running on port 4000');
+    //keep debug mode on 
+
 });
 
 const listenToEvents = () => {
@@ -90,4 +140,5 @@ const listenToEvents = () => {
         }
     });
 };
+
 listenToEvents();
