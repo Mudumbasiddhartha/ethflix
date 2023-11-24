@@ -1,22 +1,69 @@
 import "package:carousel_slider/carousel_slider.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import 'components/card_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<String> categories = ['Shows', 'Movies', 'Live Sports'];
-
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.black,
+              ),
+              child: Text(
+                'Welcome ${FirebaseAuth.instance.currentUser!.displayName}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profile'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout_outlined),
+              title: Text('Logout'),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacementNamed(context, '/login');
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        title: Text('EthFlix'),
-        // backgroundColor: Colors.black,
+        forceMaterialTransparency: true,
+        elevation: 0,
+        title: Text("Hey! ${FirebaseAuth.instance.currentUser!.displayName}"),
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              // Handle search action
-            },
+            icon: Icon(
+              Icons.favorite_outline_rounded,
+              size: 28,
+              color: const Color.fromARGB(255, 255, 84, 141),
+            ),
+            onPressed: () {},
           ),
         ],
       ),

@@ -11,7 +11,8 @@ class CardWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: InkWell(
         onTap: () => {
-          Navigator.pushNamed(context, '/details', arguments: imageUrl),
+          Navigator.pushReplacementNamed(context, '/details',
+              arguments: imageUrl),
         },
         child: Card(
           elevation: 4,

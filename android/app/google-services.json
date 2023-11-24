@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "352692810578",
+    "project_id": "ethflix-8927b",
+    "storage_bucket": "ethflix-8927b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352692810578:android:823bc4f46c1458a716408b",
+        "android_client_info": {
+          "package_name": "com.example.ethflix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352692810578-2j9ndtl561el0aje0t4asrk6qtdmc2m0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ethflix",
+            "certificate_hash": "75711a5a5b1d7ab22fc193ee495f15b7b0025ba9"
+          }
+        },
+        {
+          "client_id": "352692810578-7gkr3q5i17r5dinc2vv8j0rildlmfsac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXUbCooQkVbhx5biCZazxjklC1FALSypI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352692810578-7gkr3q5i17r5dinc2vv8j0rildlmfsac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
